@@ -1,0 +1,33 @@
+.input-field, .input_gender, .input_user, .age, .age-num, .age-text, .select, .switch, #range {
+  margin: 0px;
+}
+
+.switch {
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.input_gender, .select {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.age {
+  padding: 0px;
+}
+
+.age-text {
+  margin-bottom: 10px;
+}
+
+blockquote {
+  margin: 10px 0px;
+  border-left: 5px solid #6673ff;
+
+  .purple-text, .red-text, .green-text, .blue-text, .brown-text {
+    font-size: 20px;
+    border: 4px #83cfff outset;
+    border-radius: 10px;
+    padding: 3px 10px;
+  }
+}

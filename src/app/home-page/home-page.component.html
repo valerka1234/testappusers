@@ -1,0 +1,105 @@
+
+<div class="row">
+  <div class="col m3 s3">
+    <form class="col s12">
+      <div class="row input_user">
+        <div class="input-field col s8">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="icon_prefix" placeholder="Поиск по имени" type="text" class="validate" [(ngModel)]="searchUser" name="search">
+        </div>
+      </div>
+    </form>
+
+    <form class="col s12">
+      <div class="switch">
+        <label>
+          Только онлайн
+          <input type="checkbox" [(ngModel)]="status" name="status">
+          <span class="lever"></span>
+        </label>
+      </div>
+      <br>
+    </form>
+
+    <form class="select col s6">
+        <label>Сортировать</label>
+        <select [(ngModel)]="name_order" (click)="SortUsers(name_order, false)" name="sort">
+          <optgroup *ngFor="let group of collection" label="{{ group.label }}" (click)="SortUsers(name_order, false)">
+            <option *ngFor="let option of group.options" (click)="SortUsers(name_order, false)">{{ option.value }}</option>
+          </optgroup>
+        </select>
+      <!--</div>-->
+    </form>
+
+    <form class=" input_gender col s12">
+      <p>
+        <label>
+          <input class="with-gap" name="gender" type="radio" (click)="SetGender('male')" />
+          <span>Мужской</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input class="with-gap" name="gender" type="radio" (click)="SetGender('female')" />
+          <span>Женский</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input class="with-gap" name="gender" type="radio" (click)="SetGender(null)" checked  />
+          <span>Любой</span>
+        </label>
+      </p>
+    </form>
+
+    <form class="col s12">
+      <div class="age col s8">
+        <div class="row age-text">
+          <label for="range">Возраст: </label>
+        </div>
+        <div class="row age-num">
+          <div class="col s1">
+            <span>0</span>
+          </div>
+          <div class="col s10">
+          </div>
+          <div class="col s1">
+            <span>100</span>
+          </div>
+        </div>
+      </div>
+      <div class="input-field col s8">
+        <div class="range-field">
+          <input type="range" id="range" min="0" max="100" [(ngModel)]="age" name="age"/>
+          <blockquote class="blockquote bq-primary">
+            <span>Выбран возраст :</span>
+            <span *ngIf="age < 20" class="purple-text">{{ age }}</span>
+            <span *ngIf="age >= 20 && age < 40" class="green-text">{{ age }}</span>
+            <span *ngIf="age >= 40 && age < 60" class="blue-text">{{ age }}</span>
+            <span *ngIf="age >= 60 && age < 80" class="brown-text">{{ age }}</span>
+            <span *ngIf="age >= 80" class="red-text">{{ age }}</span>
+          </blockquote>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="col m9 s9">
+    <div class="col s1"></div>
+    <div class="col s10">
+      <app-user
+        *ngFor="let u of users | search:searchUser | gender:gender | age:age | status:status | orderBy: order:reverse:'case-insensitive' "
+        [user] = "u"
+      >
+      </app-user>
+    </div>
+    <div class="col s1"></div>
+  </div>
+
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
+</script>
